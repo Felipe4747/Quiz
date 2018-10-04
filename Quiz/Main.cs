@@ -12,6 +12,7 @@ namespace Quiz
 {
     public partial class Main : Form
     {
+        int pontos = 0;
         int cont = 20;
         public Main()
         {
