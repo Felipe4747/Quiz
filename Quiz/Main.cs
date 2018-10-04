@@ -14,16 +14,17 @@ namespace Quiz
     {
         private DAL _banco = new DAL();
         int pontos = 0;
-        int cont = 20;
-        List<DataSet> perguntas = new List<DataSet>();
+        int cont = 5;
+        List<string> perguntas = new List<string>();
         public Main()
         {
             InitializeComponent();
             _banco.DBNome = "quiz";
             _banco.Conectar();
-            for (int i = 1; i < 31; i++)
+            DataSet perguntasDataset = _banco.Buscar("select pergunta from perguntas;");
+            for (int i = 0; i < perguntasDataset.Tables["tbl_resultado"].Rows.Count; i++)
             {
-                perguntas.Add(_banco.Buscar("select pergunta from perguntas where id = " + i.ToString() + ";"));
+                perguntas.Add(perguntasDataset.Tables["tbl_resultado"].Rows[i]["pergunta"].ToString());
             }
         }
 
@@ -41,10 +42,10 @@ namespace Quiz
         public void MudaPergunta()
         {
             //Fazer as coisas pra mudar a pergunta
-            cont = 20;
+            cont = 5;
             Random rdn = new Random();
             int num;
-            num = rdn.Next(1, 30);
+            num = rdn.Next(1, perguntas.Count);
             pergunta.Text = Convert.ToString(perguntas[num]);
             perguntas.Remove(perguntas[num]);
         }
