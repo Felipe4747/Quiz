@@ -26,9 +26,16 @@ namespace Quiz
             time.Text = cont + "s";
             if (cont == 0)
             {
-                tempo.Enabled = false;
-                MessageBox.Show("O tempo acabou! :( !");
+                MudaPergunta();
             }
         }
+
+        #region Métodos
+        public void MudaPergunta()
+        {
+            //Fazer as coisas pra mudar a pergunta
+            cont = 20;
+        }
+        #endregion
     }
 }
