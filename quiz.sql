@@ -18,6 +18,7 @@ create table usuario(
 );
 drop table perguntas;
 drop table usuario;
+select * from perguntas;
 insert into perguntas values
 	(null, 'Qual dos gases abaixo não foi utilizado como arma de destruição em massa durante a 1º Guerra?', 'Gás cloro', 'Gás mostarda', 'Gás fosfogênio', 'Gás lacrimogênio', 'd'),
 	(null, 'As máscaras de gás eram inúteis contra o gás mostarda. Quais alternativas abaixo descrevem os efeitos do gás?

@@ -40,6 +40,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.time = new System.Windows.Forms.Label();
             this.tempo = new System.Windows.Forms.Timer(this.components);
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -160,12 +161,22 @@
             this.tempo.Interval = 1000;
             this.tempo.Tick += new System.EventHandler(this.tempo_Tick);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(810, 248);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "label2";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1264, 682);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.time);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -199,6 +210,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label time;
         private System.Windows.Forms.Timer tempo;
+        private System.Windows.Forms.Label label2;
     }
 }
 
