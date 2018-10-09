@@ -15,6 +15,7 @@ namespace Quiz
         private DAL _banco = new DAL();
         int pontos = 0;
         int cont = 20;
+        int contbtn = 2;
         string respCerta;
         List<string> perguntas;
         DataSet respostasDataset;
@@ -59,60 +60,65 @@ namespace Quiz
             DataSet respDataset = _banco.Buscar("select * from perguntas");
            
             respCerta = respDataset.Tables["tbl_resultado"].Rows[0]["resp_certa"].ToString();
-            respostasDataset = _banco.Buscar("select * from perguntas where id = " + num + ";");
-
-            label2.Text = "select* from perguntas where id = " + num + "; ";
+            respostasDataset = _banco.Buscar("select * from perguntas where id = " + (num+1) + ";");
             
             button1.Text = respostasDataset.Tables["tbl_resultado"].Rows[0]["resp1"].ToString();
-            respostasDataset = _banco.Buscar("select * from perguntas where id = " + num + ";");
+            respostasDataset = _banco.Buscar("select * from perguntas where id = " + (num + 1) + ";");
 
             button2.Text = respostasDataset.Tables["tbl_resultado"].Rows[0]["resp2"].ToString();
-            respostasDataset = _banco.Buscar("select * from perguntas where id = " + num + ";");
+            respostasDataset = _banco.Buscar("select * from perguntas where id = " + (num + 1) + ";");
 
             button3.Text = respostasDataset.Tables["tbl_resultado"].Rows[0]["resp3"].ToString();
-            respostasDataset = _banco.Buscar("select * from perguntas where id = " + num + ";");
+            respostasDataset = _banco.Buscar("select * from perguntas where id = " + (num + 1) + ";");
 
             button4.Text = respostasDataset.Tables["tbl_resultado"].Rows[0]["resp4"].ToString();
-            respostasDataset = _banco.Buscar("select * from perguntas where id = " + num + ";");
+            respostasDataset = _banco.Buscar("select * from perguntas where id = " + (num + 1) + ";");
             
             perguntas.Remove(perguntas[num]);
+        }
+
+        public void PerguntaCerta(Button btn)
+        {
+            btn.BackColor = Color.Green;
+            tempobtn.Enabled = true;
+        }
+
+        public void PerguntaErrada(Button btn)
+        {
+            btn.BackColor = Color.Red;
+            tempobtn.Enabled = true;
         }
         #endregion
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (respCerta == "a")
+            Button btn = (Button)sender;
+            if (respCerta == )
             {
                 pontos++;
+                PerguntaCerta(btn);
             }
+            PerguntaErrada(btn);
             MudaPergunta();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void tempobtn_Tick(object sender, EventArgs e)
         {
-            if (respCerta == "b")
+            button1.Enabled = false;
+            button2.Enabled = false;
+            button3.Enabled = false;
+            button4.Enabled = false;
+            contbtn--;
+            if (contbtn == 0)
             {
-                pontos++;
+                BackColor = Color.WhiteSmoke;
+                button1.Enabled = true;
+                button2.Enabled = true;
+                button3.Enabled = true;
+                button4.Enabled = true;
+                contbtn = 2;
+                tempobtn.Enabled = false;
             }
-            MudaPergunta();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (respCerta == "c")
-            {
-                pontos++;
-            }
-            MudaPergunta();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            if (respCerta == "d")
-            {
-                pontos++;
-            }
-            MudaPergunta();
         }
     }
 }
