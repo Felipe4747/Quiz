@@ -2,13 +2,16 @@ create database Quiz;
 use Quiz;
 create table perguntas(
 	id int not null auto_increment,
-    pergunta text not null,
-    resp1 text not null,
-    resp2 text not null,
-    resp3 text not null,
-    resp4 text not null,
-    resp_certa enum('a', 'b', 'c', 'd') not null,
+    enunciadoperg text not null,
     primary key(id)
+);
+create table respostas(
+	id int not null auto_increment,
+    id_perg int,
+	enunciadoresp text not null,
+    correta bool not null,
+    primary key(id),
+    foreign key(id_perg) references perguntas(id)
 );
 create table usuario(
 	id int not null auto_increment,
@@ -18,19 +21,47 @@ create table usuario(
 );
 drop table perguntas;
 drop table usuario;
-select * from perguntas;
+insert into respostas values
+	(null, 1, 'Gás cloro', false),
+	(null, 1, 'Gás mostarda', false),
+	(null, 1, 'Gás fosfogênio', false),
+	(null, 1, 'Gás lacrimogênio', true),
+	(null, 2, 'I-II-III estão corretas', true),
+	(null, 2, 'II-III-IV estão corretas', false),
+	(null, 2, 'I-III-IV estão corretas', false),
+	(null, 2, 'Todas estão corretas', false),
+	(null, 3, '6 anos', false),
+	(null, 3, '3 anos', false),
+	(null, 3, '8 anos', false),
+	(null, 3, '4 anos', true),
+	(null, 4, 'Estados Unidos, Alemanha e Itália', false),
+	(null, 4, 'Reino Unido, França e Alemanha', false),
+	(null, 4, 'Reino Unido, Império Russo e França', false),
+	(null, 4, 'Império Russo, Alemanha e Itália', true),
+	(null, 5, 'África', false),
+	(null, 5, 'Oeste asiático', false),
+	(null, 5, 'Europa', true),
+	(null, 5, 'Polônia', false),
+	(null, 6, 'Criada a Liga das Nações. Alemanha se torna a culpada da guerra.', true),
+	(null, 6, 'Criada a Organização das Nações Unidas. Itália se torna a culpada da guerra.', false),
+	(null, 6, 'Criada a Liga das Nações. Império Otomano se torna o culpado da guerra.', false),
+	(null, 6, 'Criada a Organização das Nações Unidas. Império Austro-Húngaro se torna culpado da guerra.', false),
+	(null, 7, 'Operação Dynamo', false),
+	(null, 7, 'Batalha de Varsóvia', false),
+	(null, 7, 'Campanha de Galipoli', true),
+	(null, 7, 'Ofensiva Brusilov', false),
 insert into perguntas values
-	(null, 'Qual dos gases abaixo não foi utilizado como arma de destruição em massa durante a 1º Guerra?', 'Gás cloro', 'Gás mostarda', 'Gás fosfogênio', 'Gás lacrimogênio', 'd'),
+	(null, 'Qual dos gases abaixo não foi utilizado como arma de destruição em massa durante a 1º Guerra?'),
 	(null, 'As máscaras de gás eram inúteis contra o gás mostarda. Quais alternativas abaixo descrevem os efeitos do gás?
 I - Causava erupções na pele
 II - Cegava instantaneamente
 III - Causava a ruptura dos vasos sanguíneos
-IV - Derretia as máscaras', 'I - II - III, estão corretas', 'II - III - IV, estão corretas', 'I - III - IV, estão corretas', 'Todas estão corretas', 'a'),
-	(null, 'Quantos anos durou a guerra?', '6 anos', '3 anos', '8 anos', '4 anos', 'd'),
-	(null, 'Quais foram os países que compuseram a tríplice entente (no inicio da 1º Guerra Mundial)?', 'Estados Unidos, Alemanha e Itália', 'Reino Unido, França e Alemanha', 'Reino Unido, Império Russo e França', 'Império Russo, Alemanha e Itália', 'c'),
-	(null, 'A Primeira Guerra Mundial foi centrada em qual continente?', 'África', 'Oeste asiático', 'Europa', 'Polônia', 'c'),
-	(null, 'A Primeira Guerra Mundial termina:', 'Criada a Liga das Nações. Alemanha se torna a culpada da guerra.', 'Criada a Organização das Nações Unidas. Itália se torna a culpada da guerra.', 'Criada a Liga das Nações. Império Otomano se torna o culpado da guerra.', 'Criada a Organização das Nações Unidas. Império Austro-Húngaro se torna culpado da guerra.', 'a'),
-	(null, 'Qual foi a operação que manchou a imagem de Winston Churchill por ter sido desastrosa?', 'Operação Dynamo', 'Batalha de Varsóvia', 'Campanha de Galipoli', 'Ofensiva Brusilov', 'c'),
+IV - Derretia as máscaras'),
+	(null, 'Quantos anos durou a guerra?'),
+	(null, 'Quais foram os países que compuseram a tríplice entente (no inicio da 1º Guerra Mundial)?'),
+	(null, 'A Primeira Guerra Mundial foi centrada em qual continente?'),
+	(null, 'A Primeira Guerra Mundial termina:'),
+	(null, 'Qual foi a operação que manchou a imagem de Winston Churchill por ter sido desastrosa?'),
 	(null, 'Qual dos itens abaixo NÃO está ligado à 1ª Guerra Mundial enquanto causa?', 'O Tratado de Frankfurt', 'A crescente procura de mercados e matérias-primas', 'A política agressiva de Bismarck', 'A disputa colonial', 'a'),
 	(null, 'Como forma de defesa, foram criadas alianças entre alguns países. Qual o nome da aliança feita entre a Inglaterra, França e Rússia? E qual o nome da aliança formada pela Alemanha, o Império Austro-Húngaro e a Itália? Respectivamente.', 'Tríplice dos Vencedores e Tríplice de Hitler.', 'Tríplice Entente e Tríplice Aliança.', 'Tríplice Aliança e Tríplice Entente.', 'Tríplice dos Unidos e Tríplice Cardial.', 'b'),
 	(null, 'O que é um estado totalitário?', 'Estado comandado pelo povo por meio de voto popular.', 'Estado comandado por um líder visando o bem estar do seu povo, dando a eles o poder de escolher o que pensar,no que acreditar.', 'Onde tudo é controlado pelo Estado, que é encabeçado pelo líder único e supremo.Sem dar liberdade de expressão ao povo, impondo a eles o que quisessem.', 'Comandado pelo Estado,porém, o poder se concentrava nas mãos da Igreja.', 'c'),
