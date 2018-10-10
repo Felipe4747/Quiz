@@ -18,7 +18,8 @@ namespace Quiz
         int contbtn = 2;
         string respCerta;
         List<string> perguntas;
-        DataSet respostasDataset;
+        DataSet respostas_certaDataset;
+        DataSet respostasDataSet;
         
         public Main()
         {
@@ -59,21 +60,23 @@ namespace Quiz
 
             DataSet respDataset = _banco.Buscar("select * from perguntas");
            
-            respCerta = respDataset.Tables["tbl_resultado"].Rows[0]["resp_certa"].ToString();
-            respostasDataset = _banco.Buscar("select * from perguntas where id = " + (num+1) + ";");
-            
-            button1.Text = respostasDataset.Tables["tbl_resultado"].Rows[0]["resp1"].ToString();
-            respostasDataset = _banco.Buscar("select * from perguntas where id = " + (num + 1) + ";");
+            respCerta = respDataset.Tables["tbl_resultado"].Rows[0]["enunciado"].ToString();
+            respostas_certaDataset = _banco.Buscar("select * from respostas where id_perg = " + (num+1) + " and correta = true;");
+
+            respostasDataSet = _banco.Buscar("select * from respostas where id_perg = " + (num+1) + ";");
+            /*
+            button1.Text = respostasDataset.Tables["tbl_resultado"].Rows[0]["enunciado"].ToString();
+            respostasDataset = _banco.Buscar("select * from respostas where id_perg = " + (num + 1) + ";");
 
             button2.Text = respostasDataset.Tables["tbl_resultado"].Rows[0]["resp2"].ToString();
-            respostasDataset = _banco.Buscar("select * from perguntas where id = " + (num + 1) + ";");
+            respostasDataset = _banco.Buscar("select * from respostas where id_perg = " + (num + 1) + ";");
 
             button3.Text = respostasDataset.Tables["tbl_resultado"].Rows[0]["resp3"].ToString();
-            respostasDataset = _banco.Buscar("select * from perguntas where id = " + (num + 1) + ";");
+            respostasDataset = _banco.Buscar("select * from respostas where id_perg = " + (num + 1) + ";");
 
             button4.Text = respostasDataset.Tables["tbl_resultado"].Rows[0]["resp4"].ToString();
-            respostasDataset = _banco.Buscar("select * from perguntas where id = " + (num + 1) + ";");
-            
+            respostasDataset = _banco.Buscar("select * from respostas where id_perg = " + (num + 1) + ";");
+            */
             perguntas.Remove(perguntas[num]);
         }
 
@@ -93,11 +96,11 @@ namespace Quiz
         private void button1_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            if (respCerta == )
+            if (respCerta == btn.Text)
             {
                 pontos++;
                 PerguntaCerta(btn);
-            }
+            } 
             PerguntaErrada(btn);
             MudaPergunta();
         }
