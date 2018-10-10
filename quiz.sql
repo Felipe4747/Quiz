@@ -19,8 +19,7 @@ create table usuario(
     pontuacao int,
     primary key(id)
 );
-drop table perguntas;
-drop table usuario;
+
 insert into respostas values
 	(null, 1, 'Gás cloro', false),
 	(null, 1, 'Gás mostarda', false),

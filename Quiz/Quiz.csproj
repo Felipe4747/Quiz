@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data">
-      <HintPath>..\..\..\..\Desktop\mysql-connector-net-8.0.12-noinstall\v4.5.2\MySql.Data.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\v4.5.2\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
