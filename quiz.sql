@@ -20,6 +20,81 @@ create table usuario(
     primary key(id)
 );
 
+insert into perguntas values
+	(null, 'Qual dos gases abaixo não foi utilizado como arma de destruição em massa durante a 1º Guerra?'),
+	(null, 'As máscaras de gás eram inúteis contra o gás mostarda. Quais alternativas abaixo descrevem os efeitos do gás?
+I - Causava erupções na pele
+II - Cegava instantaneamente
+III - Causava a ruptura dos vasos sanguíneos
+IV - Derretia as máscaras'),
+	(null, 'Quantos anos durou a guerra?'),
+	(null, 'Quais foram os países que compuseram a tríplice entente (no inicio da 1º Guerra Mundial)?'),
+	(null, 'A Primeira Guerra Mundial foi centrada em qual continente?'),
+	(null, 'A Primeira Guerra Mundial termina:'),
+	(null, 'Qual foi a operação que manchou a imagem de Winston Churchill por ter sido desastrosa?'),
+	(null, 'Qual dos itens abaixo NÃO está ligado à 1ª Guerra Mundial enquanto causa?'),
+	(null, 'Como forma de defesa, foram criadas alianças entre alguns países. Qual o nome da aliança feita entre a Inglaterra, França e Rússia? E qual o nome da aliança formada pela Alemanha, o Império Austro-Húngaro e a Itália? Respectivamente.'),
+	(null, 'O que é um estado totalitário?'),
+	(null, 'Qual foi o estopim da guerra?'),
+	(null, 'Quantos mortos, aproximadamente, a guerra deixou?'),
+	(null, 'Em qual ano os EUA entraram na guerra?'),
+	(null, 'O que causou a rivalidade entre Império russo e Alemanha?'),
+	(null, 'Por que ocorria o antigermanismo inglês?'),
+	(null, 'Por que ocorria o antigermanismo francês?'),
+	(null, 'I.A construção da estrada de ferro Berlin-Bagdá: sua construção colocaria à disposição da Alemanha os lençóis petrolíferos do Golfo Pérsico e os mercados orientais, além de ameaçar as rotas de comunicação entre a Inglaterra e seu Império.
+
+II.Pan-Eslavismo Russo (união de todos os povos eslavos sob a proteção da Rússia): o Pan-Eslavismo servia de justificativa para os interesses imperialistas da Rússia de dominar regiões da Europa Oriental habitadas por outros povos eslavos (poloneses, ucranianos, tchecos, eslovacos, sérvios, búlgaros, croatas...)
+
+III. Alemanha e a Itália eram imperialistas, queriam e precisavam de colônias, para isso precisariam tomar as colônias de outros países, já que não havia mais quase locais para serem dominados
+
+Quais desses fatores contribuíram para o advento da guerra?'),
+	(null, 'I.Nacionalismo da Sérvia
+II.Conflitos originários da decadência do Império Turco
+III.Crises no Marrocos: alemães, ingleses e franceses disputavam essa área.
+IV.Primeira e segunda Guerra Balcânica
+
+Quais desses fatores contribuíram para o advento da guerra?'),
+	(null, 'A primeira guerra dividiu-se em 3 fases. Coloque essas fases na ordem correta:'),
+	(null, 'O Tratado de Versalhes colocou de lado o “Programa dos 14 Pontos” e os “vencedores” impuseram duras penalidades à Alemanha:
+
+I. A Alemanha perdeu suas colônias
+II. Ficou proibida de ter forças armadas
+III. Foi considerada culpada pela guerra
+IV. Teve que pagar uma indenização aos “vencedores”'),
+	(null, 'Quais foram as consequências da guerra?
+
+I. Famílias destruídas e crianças órfãs
+II. Os EUA tornaram-se o país mais rico do mundo
+III. O império Austro-Húngaro se fragmentou
+IV. O desemprego diminuiu na Europa.'),
+	(null, 'Quatro anos após a Guerra, a Europa já não era mais a mesma. Dentre as principais mudanças estão:
+
+I. Presidentes no lugar de príncipes, automóveis circulando pelas ruas, submarinos nos mares e aviões nos céus
+II. O cinema e o rádio também começaram a se expandir
+III. As mulheres tomaram consciência dos seus direitos e tornaram-se mais livres
+IV. Foram criadas as cotas para Negros.'),
+	(null, 'I. Crise de desemprego
+II. Ascensão Alemã no pós guerra
+III. Nazismo
+
+Dos fatos que a 1ª Guerra causou, estão corretas:'),
+	(null, 'Qual desses países conseguiu expandir sua economia e se tornar potência mundial:'),
+	(null, 'O choque da nova fase do capitalismo mundial, chamado de Imperialismo pelos economistas alemães e ingleses, provocou o surgimento da Primeira Guerra Mundial. Quais eram os fenômenos que estavam ligados ao Imperialismo?'),
+	(null, 'Quais foram as batalhas que ocorreram envolvendo Franceses, Ingleses e Alemães?'),
+	(null, '"Com a revolução russa de 1917 e consequentemente a ruína de sua economia, os bolcheviques (grupo político russo) optam por assinar um tratado com os alemães para o fim do conflito entre ambos os países. [...]"
+
+Qual era o nome deste tratado?'),
+	(null, '(FGV-RJ 2015) Sobre a participação brasileira na Primeira Guerra Mundial, é correto afirmar:'),
+	(null, 'A Primeira Guerra Mundial deixou profundas consequências para todo o mundo. Analise as afirmações abaixo:
+
+I - redesenhou o mapa político da Europa e do Oriente Médio;
+II - marcou a queda do capitalismo liberal;
+III - motivou a criação da Liga das Nações;
+IV - permitiu a ascensão econômica e política dos Estados Unidos.
+
+Quais afirmações estão corretas?'),
+	(null, '(Fatec) Segundo as teorias desenvolvimentistas, a guerra era concebida como:');
+    
 insert into respostas values
 	(null, 1, 'Gás cloro', false),
 	(null, 1, 'Gás mostarda', false),
@@ -141,77 +216,3 @@ insert into respostas values
 	(null, 30, 'uma política econômica tendendo a desvalorizar a produção agrícola.', false),
 	(null, 30, 'uma forma de criar condições para a importação de tecnologia estrangeira.', false),
 	(null, 30, 'um recurso complementar e necessário à importação de produtos primários.', false);
-insert into perguntas values
-	(null, 'Qual dos gases abaixo não foi utilizado como arma de destruição em massa durante a 1º Guerra?'),
-	(null, 'As máscaras de gás eram inúteis contra o gás mostarda. Quais alternativas abaixo descrevem os efeitos do gás?
-I - Causava erupções na pele
-II - Cegava instantaneamente
-III - Causava a ruptura dos vasos sanguíneos
-IV - Derretia as máscaras'),
-	(null, 'Quantos anos durou a guerra?'),
-	(null, 'Quais foram os países que compuseram a tríplice entente (no inicio da 1º Guerra Mundial)?'),
-	(null, 'A Primeira Guerra Mundial foi centrada em qual continente?'),
-	(null, 'A Primeira Guerra Mundial termina:'),
-	(null, 'Qual foi a operação que manchou a imagem de Winston Churchill por ter sido desastrosa?'),
-	(null, 'Qual dos itens abaixo NÃO está ligado à 1ª Guerra Mundial enquanto causa?'),
-	(null, 'Como forma de defesa, foram criadas alianças entre alguns países. Qual o nome da aliança feita entre a Inglaterra, França e Rússia? E qual o nome da aliança formada pela Alemanha, o Império Austro-Húngaro e a Itália? Respectivamente.'),
-	(null, 'O que é um estado totalitário?'),
-	(null, 'Qual foi o estopim da guerra?'),
-	(null, 'Quantos mortos, aproximadamente, a guerra deixou?'),
-	(null, 'Em qual ano os EUA entraram na guerra?'),
-	(null, 'O que causou a rivalidade entre Império russo e Alemanha?'),
-	(null, 'Por que ocorria o antigermanismo inglês?'),
-	(null, 'Por que ocorria o antigermanismo francês?'),
-	(null, 'I.A construção da estrada de ferro Berlin-Bagdá: sua construção colocaria à disposição da Alemanha os lençóis petrolíferos do Golfo Pérsico e os mercados orientais, além de ameaçar as rotas de comunicação entre a Inglaterra e seu Império.
-
-II.Pan-Eslavismo Russo (união de todos os povos eslavos sob a proteção da Rússia): o Pan-Eslavismo servia de justificativa para os interesses imperialistas da Rússia de dominar regiões da Europa Oriental habitadas por outros povos eslavos (poloneses, ucranianos, tchecos, eslovacos, sérvios, búlgaros, croatas...)
-
-III. Alemanha e a Itália eram imperialistas, queriam e precisavam de colônias, para isso precisariam tomar as colônias de outros países, já que não havia mais quase locais para serem dominados
-
-Quais desses fatores contribuíram para o advento da guerra?'),
-	(null, 'I.Nacionalismo da Sérvia
-II.Conflitos originários da decadência do Império Turco
-III.Crises no Marrocos: alemães, ingleses e franceses disputavam essa área.
-IV.Primeira e segunda Guerra Balcânica
-
-Quais desses fatores contribuíram para o advento da guerra?'),
-	(null, 'A primeira guerra dividiu-se em 3 fases. Coloque essas fases na ordem correta:'),
-	(null, 'O Tratado de Versalhes colocou de lado o “Programa dos 14 Pontos” e os “vencedores” impuseram duras penalidades à Alemanha:
-
-I. A Alemanha perdeu suas colônias
-II. Ficou proibida de ter forças armadas
-III. Foi considerada culpada pela guerra
-IV. Teve que pagar uma indenização aos “vencedores”'),
-	(null, 'Quais foram as consequências da guerra?
-
-I. Famílias destruídas e crianças órfãs
-II. Os EUA tornaram-se o país mais rico do mundo
-III. O império Austro-Húngaro se fragmentou
-IV. O desemprego diminuiu na Europa.'),
-	(null, 'Quatro anos após a Guerra, a Europa já não era mais a mesma. Dentre as principais mudanças estão:
-
-I. Presidentes no lugar de príncipes, automóveis circulando pelas ruas, submarinos nos mares e aviões nos céus
-II. O cinema e o rádio também começaram a se expandir
-III. As mulheres tomaram consciência dos seus direitos e tornaram-se mais livres
-IV. Foram criadas as cotas para Negros.'),
-	(null, 'I. Crise de desemprego
-II. Ascensão Alemã no pós guerra
-III. Nazismo
-
-Dos fatos que a 1ª Guerra causou, estão corretas:'),
-	(null, 'Qual desses países conseguiu expandir sua economia e se tornar potência mundial:'),
-	(null, 'O choque da nova fase do capitalismo mundial, chamado de Imperialismo pelos economistas alemães e ingleses, provocou o surgimento da Primeira Guerra Mundial. Quais eram os fenômenos que estavam ligados ao Imperialismo?'),
-	(null, 'Quais foram as batalhas que ocorreram envolvendo Franceses, Ingleses e Alemães?'),
-	(null, '"Com a revolução russa de 1917 e consequentemente a ruína de sua economia, os bolcheviques (grupo político russo) optam por assinar um tratado com os alemães para o fim do conflito entre ambos os países. [...]"
-
-Qual era o nome deste tratado?'),
-	(null, '(FGV-RJ 2015) Sobre a participação brasileira na Primeira Guerra Mundial, é correto afirmar:'),
-	(null, 'A Primeira Guerra Mundial deixou profundas consequências para todo o mundo. Analise as afirmações abaixo:
-
-I - redesenhou o mapa político da Europa e do Oriente Médio;
-II - marcou a queda do capitalismo liberal;
-III - motivou a criação da Liga das Nações;
-IV - permitiu a ascensão econômica e política dos Estados Unidos.
-
-Quais afirmações estão corretas?'),
-	(null, '(Fatec) Segundo as teorias desenvolvimentistas, a guerra era concebida como:');
