@@ -14,17 +14,19 @@ namespace Quiz
     {
         private DAL _banco = new DAL();
         int pontos = 0;
-        int cont = 20;
-        int contbtn = 2;
+        int cont = 10;
+        int contbtn = 1;
         string respCerta;
         List<string> perguntas;
         List<string> respostas;
+        
         
         public Main()
         {
             InitializeComponent();
 
             perguntas = new List<string>();
+            respostas = new List<string>();
             
             _banco.DBNome = "quiz";
             _banco.Conectar();
@@ -48,8 +50,15 @@ namespace Quiz
         #region Métodos
         public void MudaPergunta()
         {
+            cont = 10;
             tempo.Enabled = true;
-            cont = 20;
+
+            button1.BackColor = Color.WhiteSmoke;
+            button2.BackColor = Color.WhiteSmoke;
+            button3.BackColor = Color.WhiteSmoke;
+            button4.BackColor = Color.WhiteSmoke;
+
+            
             Random rdn = new Random();
             int num;
             num = rdn.Next(0, perguntas.Count-1);
@@ -71,6 +80,10 @@ namespace Quiz
             button3.Text = respostas[2];
             button4.Text = respostas[3];
 
+            for (int i = 0; i < respDataset.Tables["tbl_resultado"].Rows.Count; i++)
+            {
+                respostas.Remove(respostas[0]);
+            }
             perguntas.Remove(perguntas[num]);
         }
 
@@ -116,7 +129,7 @@ namespace Quiz
                 button3.Enabled = true;
                 button4.Enabled = true;
                 tempobtn.Enabled = false;
-                contbtn = 2;
+                contbtn = 1;
                 MudaPergunta();
             }
         }
