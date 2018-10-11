@@ -107,9 +107,10 @@ namespace Quiz
             {
                 pontos++;
                 PerguntaCerta(btn);
-            } 
-            PerguntaErrada(btn);
-            MudaPergunta();
+            } else
+            {
+                PerguntaErrada(btn);
+            }
         }
 
         private void tempobtn_Tick(object sender, EventArgs e)
@@ -126,8 +127,9 @@ namespace Quiz
                 button2.Enabled = true;
                 button3.Enabled = true;
                 button4.Enabled = true;
-                contbtn = 2;
                 tempobtn.Enabled = false;
+                contbtn = 2;
+                MudaPergunta();
             }
         }
     }
