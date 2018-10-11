@@ -58,12 +58,17 @@ namespace Quiz
             pergunta.Text = Convert.ToString(perguntas[num]);
 
 
-            DataSet respDataset = _banco.Buscar("select * from respostas;");
-           
+            DataSet respDataset = _banco.Buscar("select * from respostas where id_perg = " + (num + 1));          
+            
             respCerta = respDataset.Tables["tbl_resultado"].Rows[0]["enunciado"].ToString();
+            respCerta = respDataset.Tables["tbl_resultado"].Rows[1]["enunciado"].ToString();
+
+            Convert.ToString(correta) = respDataset.Tables["tbl_resultado"].Rows[1]["correta"].ToString();
+
+
             respostas_certaDataset = _banco.Buscar("select * from respostas where id_perg = " + (num+1) + " and correta = true;");
 
-            respostasDataSet = _banco.Buscar("select * from respostas where id_perg = " + (num+1) + ";");
+            respostasDataSet = _banco.Buscar("select * from respostas where id_perg = " + (num+1));
             Console.WriteLine("respostasDataSet" + respostasDataSet.Tables["tbl_resultado"].Rows[0]["enunciado"].ToString());
             
             /*
