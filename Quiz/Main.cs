@@ -18,8 +18,7 @@ namespace Quiz
         int contbtn = 2;
         string respCerta;
         List<string> perguntas;
-        DataSet respostas_certaDataset;
-        DataSet respostasDataSet;
+        List<string> respostas;
         
         public Main()
         {
@@ -32,7 +31,7 @@ namespace Quiz
             DataSet perguntasDataset = _banco.Buscar("select * from perguntas;");
             for (int i = 0; i < perguntasDataset.Tables["tbl_resultado"].Rows.Count; i++)
             {
-                perguntas.Add(perguntasDataset.Tables["tbl_resultado"].Rows[i]["pergunta"].ToString());
+                perguntas.Add(perguntasDataset.Tables["tbl_resultado"].Rows[i]["enunciadoperg"].ToString());
             }
         }
 
@@ -49,7 +48,7 @@ namespace Quiz
         #region Métodos
         public void MudaPergunta()
         {
-            //Fazer as coisas pra mudar a pergunta
+            tempo.Enabled = true;
             cont = 20;
             Random rdn = new Random();
             int num;
@@ -57,33 +56,21 @@ namespace Quiz
             num++;
             pergunta.Text = Convert.ToString(perguntas[num]);
 
-
-            DataSet respDataset = _banco.Buscar("select * from respostas where id_perg = " + (num + 1));          
+            DataSet respDataset = _banco.Buscar("select * from respostas where id_perg = " + (num + 1));
             
-            respCerta = respDataset.Tables["tbl_resultado"].Rows[0]["enunciado"].ToString();
-            respCerta = respDataset.Tables["tbl_resultado"].Rows[1]["enunciado"].ToString();
+            for (int i = 0; i < respDataset.Tables["tbl_resultado"].Rows.Count; i++)
+            {
+                respostas.Add(respDataset.Tables["tbl_resultado"].Rows[i]["enunciadoresp"].ToString());
+            }       
 
-            Convert.ToString(correta) = respDataset.Tables["tbl_resultado"].Rows[1]["correta"].ToString();
+            DataSet respCertaDataset = _banco.Buscar("select * from respostas where id_perg = " + (num+1) + " and correta = true;");
+            respCerta = respCertaDataset.ToString();
 
+            button1.Text = respostas[0];
+            button2.Text = respostas[1];
+            button3.Text = respostas[2];
+            button4.Text = respostas[3];
 
-            respostas_certaDataset = _banco.Buscar("select * from respostas where id_perg = " + (num+1) + " and correta = true;");
-
-            respostasDataSet = _banco.Buscar("select * from respostas where id_perg = " + (num+1));
-            Console.WriteLine("respostasDataSet" + respostasDataSet.Tables["tbl_resultado"].Rows[0]["enunciado"].ToString());
-            
-            /*
-            button1.Text = respostasDataset.Tables["tbl_resultado"].Rows[0]["enunciado"].ToString();
-            respostasDataset = _banco.Buscar("select * from respostas where id_perg = " + (num + 1) + ";");
-
-            button2.Text = respostasDataset.Tables["tbl_resultado"].Rows[0]["resp2"].ToString();
-            respostasDataset = _banco.Buscar("select * from respostas where id_perg = " + (num + 1) + ";");
-
-            button3.Text = respostasDataset.Tables["tbl_resultado"].Rows[0]["resp3"].ToString();
-            respostasDataset = _banco.Buscar("select * from respostas where id_perg = " + (num + 1) + ";");
-
-            button4.Text = respostasDataset.Tables["tbl_resultado"].Rows[0]["resp4"].ToString();
-            respostasDataset = _banco.Buscar("select * from respostas where id_perg = " + (num + 1) + ";");
-            */
             perguntas.Remove(perguntas[num]);
         }
 
@@ -103,7 +90,8 @@ namespace Quiz
         private void button1_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            if (respCerta == btn.Text)
+            tempo.Enabled = false;
+            if (btn.Text == respCerta)
             {
                 pontos++;
                 PerguntaCerta(btn);
