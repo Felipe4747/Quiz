@@ -17,6 +17,8 @@ namespace Quiz
         int cont = 10;
         int contbtn = 1;
         string respCerta;
+        int combo = 0;
+        int contperg = 0;
         List<string> perguntas;
         List<string> respostas;
         
@@ -39,17 +41,28 @@ namespace Quiz
 
         private void tempo_Tick(object sender, EventArgs e)
         {
-            cont--;
-            time.Text = cont + "s";
-            if (cont == 0)
+            if (contperg < 10)
             {
-                MudaPergunta();
+                cont--;
+                time.Text = cont + "s";
+                if (cont == 0)
+                {
+                    combo = 0;
+                    combotext.Text = combo.ToString() + "x";
+                    MudaPergunta();
+                }
             }
+            else
+            {
+                this.Close();
+            }
+
         }
 
         #region Métodos
         public void MudaPergunta()
         {
+            contperg++;
             cont = 10;
             tempo.Enabled = true;
 
@@ -73,7 +86,7 @@ namespace Quiz
             }       
 
             DataSet respCertaDataset = _banco.Buscar("select * from respostas where id_perg = " + (num+1) + " and correta = true;");
-            respCerta = respCertaDataset.ToString();
+            respCerta = respCertaDataset.Tables["tbl_resultado"].Rows[0]["enunciadoresp"].ToString();
 
             button1.Text = respostas[0];
             button2.Text = respostas[1];
@@ -90,12 +103,18 @@ namespace Quiz
         public void PerguntaCerta(Button btn)
         {
             btn.BackColor = Color.Green;
+            combo++;
+            combotext.Text = combo.ToString() + "x";
+            pontos += cont*combo;
+            pont.Text = pontos.ToString();
             tempobtn.Enabled = true;
         }
 
         public void PerguntaErrada(Button btn)
         {
             btn.BackColor = Color.Red;
+            combo = 0;
+            combotext.Text = combo.ToString() + "x";
             tempobtn.Enabled = true;
         }
         #endregion
@@ -104,13 +123,21 @@ namespace Quiz
         {
             Button btn = (Button)sender;
             tempo.Enabled = false;
-            if (btn.Text == respCerta)
+            if (contperg < 10)
             {
-                pontos++;
-                PerguntaCerta(btn);
-            } else
+                if (btn.Text == respCerta)
+                {
+                    pontos++;
+                    PerguntaCerta(btn);
+                }
+                else
+                {
+                    PerguntaErrada(btn);
+                }
+            }
+            else
             {
-                PerguntaErrada(btn);
+                this.Close();
             }
         }
 
