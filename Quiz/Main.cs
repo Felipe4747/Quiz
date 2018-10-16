@@ -41,7 +41,7 @@ namespace Quiz
 
         private void tempo_Tick(object sender, EventArgs e)
         {
-            if (contperg < 10)
+            if (contperg <= 10)
             {
                 cont--;
                 time.Text = cont + "s";
@@ -83,9 +83,9 @@ namespace Quiz
             for (int i = 0; i < respDataset.Tables["tbl_resultado"].Rows.Count; i++)
             {
                 respostas.Add(respDataset.Tables["tbl_resultado"].Rows[i]["enunciadoresp"].ToString());
-            }       
+            }
 
-            DataSet respCertaDataset = _banco.Buscar("select * from respostas where id_perg = " + (num+1) + " and correta = true;");
+            DataSet respCertaDataset = _banco.Buscar("select * from respostas where id_perg = " + (num + 1) + " and correta = true;");
             respCerta = respCertaDataset.Tables["tbl_resultado"].Rows[0]["enunciadoresp"].ToString();
 
             button1.Text = respostas[0];
@@ -98,6 +98,11 @@ namespace Quiz
                 respostas.Remove(respostas[0]);
             }
             perguntas.Remove(perguntas[num]);
+
+            button1.Enabled = true;
+            button2.Enabled = true;
+            button3.Enabled = true;
+            button4.Enabled = true;
         }
 
         public void PerguntaCerta(Button btn)
@@ -121,9 +126,14 @@ namespace Quiz
 
         private void button1_Click(object sender, EventArgs e)
         {
+            button1.Enabled = false;
+            button2.Enabled = false;
+            button3.Enabled = false;
+            button4.Enabled = false;
+
             Button btn = (Button)sender;
             tempo.Enabled = false;
-            if (contperg < 10)
+            if (contperg <= 10)
             {
                 if (btn.Text == respCerta)
                 {
@@ -143,18 +153,10 @@ namespace Quiz
 
         private void tempobtn_Tick(object sender, EventArgs e)
         {
-            button1.Enabled = false;
-            button2.Enabled = false;
-            button3.Enabled = false;
-            button4.Enabled = false;
             contbtn--;
             if (contbtn == 0)
             {
                 BackColor = Color.WhiteSmoke;
-                button1.Enabled = true;
-                button2.Enabled = true;
-                button3.Enabled = true;
-                button4.Enabled = true;
                 tempobtn.Enabled = false;
                 contbtn = 1;
                 MudaPergunta();
