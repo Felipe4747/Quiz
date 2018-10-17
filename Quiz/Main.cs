@@ -14,13 +14,15 @@ namespace Quiz
     {
         private DAL _banco = new DAL();
         int pontos = 0;
-        int cont = 10;
+        int cont;
         int contbtn = 1;
-        string respCerta;
         int combo = 0;
         int contperg = 0;
+        public int num;
+
         List<string> perguntas;
         List<string> respostas;
+        List<bool> respcerta;
         
         
         public Main()
@@ -29,7 +31,9 @@ namespace Quiz
 
             perguntas = new List<string>();
             respostas = new List<string>();
-            
+            respcerta = new List<bool>();
+
+            DesativarAtivar(false);
             _banco.DBNome = "quiz";
             _banco.Conectar();
             DataSet perguntasDataset = _banco.Buscar("select * from perguntas;");
@@ -37,6 +41,13 @@ namespace Quiz
             {
                 perguntas.Add(perguntasDataset.Tables["tbl_resultado"].Rows[i]["enunciadoperg"].ToString());
             }
+            DataSet respostasDataset = _banco.Buscar("select * from respostas;");
+            for (int i = 0; i < respostasDataset.Tables["tbl_resultado"].Rows.Count; i++)
+            {
+                respostas.Add(respostasDataset.Tables["tbl_resultado"].Rows[i]["enunciadoresp"].ToString());
+                respcerta.Add(Convert.ToBoolean(respostasDataset.Tables["tbl_resultado"].Rows[i]["correta"]));
+            }
+            MudaPergunta();
         }
 
         private void tempo_Tick(object sender, EventArgs e)
@@ -60,6 +71,23 @@ namespace Quiz
         }
 
         #region Métodos
+        public void DesativarAtivar(bool Ativar)
+        {
+            if (Ativar)
+            {
+                button1.Enabled = true;
+                button2.Enabled = true;
+                button3.Enabled = true;
+                button4.Enabled = true;
+            }
+            else
+            {
+                button1.Enabled = false;
+                button2.Enabled = false;
+                button3.Enabled = false;
+                button4.Enabled = false;
+            }
+        }
         public void MudaPergunta()
         {
             contperg++;
@@ -71,38 +99,23 @@ namespace Quiz
             button3.BackColor = Color.WhiteSmoke;
             button4.BackColor = Color.WhiteSmoke;
 
-            
+            DataSet respostasDataset = new DataSet();
             Random rdn = new Random();
-            int num;
             num = rdn.Next(0, perguntas.Count-1);
             num++;
             pergunta.Text = Convert.ToString(perguntas[num]);
+            button1.Text = respostas[4*num];
+            button2.Text = respostas[4*num+1];
+            button3.Text = respostas[4*num+2];
+            button4.Text = respostas[4*num+3];
 
-            DataSet respDataset = _banco.Buscar("select * from respostas where id_perg = " + (num + 1));
-            
-            for (int i = 0; i < respDataset.Tables["tbl_resultado"].Rows.Count; i++)
+            for (int i = 0; i < 4; i++)
             {
-                respostas.Add(respDataset.Tables["tbl_resultado"].Rows[i]["enunciadoresp"].ToString());
-            }
-
-            DataSet respCertaDataset = _banco.Buscar("select * from respostas where id_perg = " + (num + 1) + " and correta = true;");
-            respCerta = respCertaDataset.Tables["tbl_resultado"].Rows[0]["enunciadoresp"].ToString();
-
-            button1.Text = respostas[0];
-            button2.Text = respostas[1];
-            button3.Text = respostas[2];
-            button4.Text = respostas[3];
-
-            for (int i = 0; i < respDataset.Tables["tbl_resultado"].Rows.Count; i++)
-            {
-                respostas.Remove(respostas[0]);
+                respostas.Remove(respostas[4*num]);
             }
             perguntas.Remove(perguntas[num]);
 
-            button1.Enabled = true;
-            button2.Enabled = true;
-            button3.Enabled = true;
-            button4.Enabled = true;
+            DesativarAtivar(true);
         }
 
         public void PerguntaCerta(Button btn)
@@ -126,16 +139,81 @@ namespace Quiz
 
         private void button1_Click(object sender, EventArgs e)
         {
-            button1.Enabled = false;
-            button2.Enabled = false;
-            button3.Enabled = false;
-            button4.Enabled = false;
-
+            DesativarAtivar(false);
             Button btn = (Button)sender;
             tempo.Enabled = false;
             if (contperg <= 10)
             {
-                if (btn.Text == respCerta)
+                if (respcerta[4*num] == true)
+                {
+                    pontos++;
+                    PerguntaCerta(btn);
+                }
+                else
+                {
+                    PerguntaErrada(btn);
+                }
+            }
+            else
+            {
+                this.Close();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            DesativarAtivar(false);
+            Button btn = (Button)sender;
+            tempo.Enabled = false;
+            if (contperg <= 10)
+            {
+                if (respcerta[4 * num+1] == true)
+                {
+                    pontos++;
+                    PerguntaCerta(btn);
+                }
+                else
+                {
+                    PerguntaErrada(btn);
+                }
+            }
+            else
+            {
+                this.Close();
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DesativarAtivar(false);
+            Button btn = (Button)sender;
+            tempo.Enabled = false;
+            if (contperg <= 10)
+            {
+                if (respcerta[4 * num + 2] == true)
+                {
+                    pontos++;
+                    PerguntaCerta(btn);
+                }
+                else
+                {
+                    PerguntaErrada(btn);
+                }
+            }
+            else
+            {
+                this.Close();
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            DesativarAtivar(false);
+            Button btn = (Button)sender;
+            tempo.Enabled = false;
+            if (contperg <= 10)
+            {
+                if (respcerta[4 * num + 3] == true)
                 {
                     pontos++;
                     PerguntaCerta(btn);
@@ -162,5 +240,6 @@ namespace Quiz
                 MudaPergunta();
             }
         }
+
     }
 }
