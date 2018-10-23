@@ -16,6 +16,7 @@ namespace Quiz
         int pontos = 0;
         int cont;
         int contbtn = 1;
+        int contresp;
         int combo = 0;
         int contperg = 0;
         public int num;
@@ -50,27 +51,37 @@ namespace Quiz
             MudaPergunta();
         }
 
-        private void tempo_Tick(object sender, EventArgs e)
+        #region Métodos
+        public void MudaPergunta()
         {
-            if (contperg <= 10)
-            {
-                cont--;
-                time.Text = cont + "s";
-                if (cont == 0)
-                {
-                    combo = 0;
-                    combotext.Text = combo.ToString() + "x";
-                    MudaPergunta();
-                }
-            }
-            else
-            {
-                MessageBox.Show("Acabaste");
-            }
+            contperg++;
+            cont = 10;
+            tempo.Enabled = true;
 
+            button1.BackColor = Color.WhiteSmoke;
+            button2.BackColor = Color.WhiteSmoke;
+            button3.BackColor = Color.WhiteSmoke;
+            button4.BackColor = Color.WhiteSmoke;
+
+            DataSet respostasDataset = new DataSet();
+            Random rdn = new Random();
+            num = rdn.Next(0, perguntas.Count - 1);
+
+            pergunta.Text = Convert.ToString(perguntas[num]);
+            button1.Text = respostas[4 * num];
+            button2.Text = respostas[4 * num + 1];
+            button3.Text = respostas[4 * num + 2];
+            button4.Text = respostas[4 * num + 3];
+
+            DesativarAtivar(true);
+            /*
+            Console.WriteLine(perguntas[num] + " " + respostas[4*num] + " " + respcerta[4*num]);
+            Console.WriteLine(perguntas[num] + " " + respostas[4 * num+1] + " " + respcerta[4 * num + 1]);
+            Console.WriteLine(perguntas[num] + " " + respostas[4 * num + 2] + " " + respcerta[4 * num + 2]);
+            Console.WriteLine(perguntas[num] + " " + respostas[4 * num + 3] + " " + respcerta[4 * num + 3]);
+            */
         }
 
-        #region Métodos
         public void DesativarAtivar(bool Ativar)
         {
             if (Ativar)
@@ -89,159 +100,102 @@ namespace Quiz
             }
         }
 
-        public void RemoveCerta()
+        public void RemoveTudo()
         {
             for(int i = 0; i < 4; i++)
             {
                 respcerta.Remove(respcerta[4 * num]);
-            }
-        }
-
-        public void MudaPergunta()
-        {
-            contperg++;
-            cont = 10;
-            tempo.Enabled = true;
-
-            button1.BackColor = Color.WhiteSmoke;
-            button2.BackColor = Color.WhiteSmoke;
-            button3.BackColor = Color.WhiteSmoke;
-            button4.BackColor = Color.WhiteSmoke;
-
-            DataSet respostasDataset = new DataSet();
-            Random rdn = new Random();
-            num = rdn.Next(0, perguntas.Count-1);
-
-            pergunta.Text = Convert.ToString(perguntas[num]);
-            button1.Text = respostas[4*num];
-            button2.Text = respostas[4*num+1];
-            button3.Text = respostas[4*num+2];
-            button4.Text = respostas[4*num+3];
-
-            for (int i = 0; i < 4; i++)
-            {
-                respostas.Remove(respostas[4*num]);
+                respostas.Remove(respostas[4 * num]);
             }
             perguntas.Remove(perguntas[num]);
-
-            DesativarAtivar(true);
-            /*
-            Console.WriteLine(perguntas[num] + " " + respostas[4*num] + " " + respcerta[4*num]);
-            Console.WriteLine(perguntas[num] + " " + respostas[4 * num+1] + " " + respcerta[4 * num + 1]);
-            Console.WriteLine(perguntas[num] + " " + respostas[4 * num + 2] + " " + respcerta[4 * num + 2]);
-            Console.WriteLine(perguntas[num] + " " + respostas[4 * num + 3] + " " + respcerta[4 * num + 3]);
-            */
-
         }
 
-        public void PerguntaCerta(Button btn)
-        {
-            btn.BackColor = Color.Green;
-            combo++;
-            combotext.Text = combo.ToString() + "x";
-            pontos += cont*combo;
-            pont.Text = pontos.ToString();
-            tempobtn.Enabled = true;
-        }
-
-        public void PerguntaErrada(Button btn)
-        {
-            btn.BackColor = Color.Red;
-            combo = 0;
-            combotext.Text = combo.ToString() + "x";
-            tempobtn.Enabled = true;
-        }
-        #endregion
-
-        private void button1_Click(object sender, EventArgs e)
+        public void ButtonClick(Button btn, int contresp)
         {
             DesativarAtivar(false);
-            Button btn = (Button)sender;
             tempo.Enabled = false;
             if (contperg <= 10)
             {
-                if (respcerta[4*num] == true)
+                if (respcerta[4 * num + contresp] == true)
                 {
                     pontos++;
-                    PerguntaCerta(btn);
+                    CertaErrada(true, btn);
+                    RemoveTudo();
                 }
                 else
                 {
-                    PerguntaErrada(btn);
+                    CertaErrada(false, btn);
+                    RemoveTudo();
                 }
-                RemoveCerta();
             }
             else
             {
                 MessageBox.Show("Acabaste");
             }
+        }
+
+        public void CertaErrada(bool certa, Button btn)
+        {
+            if (certa)
+            {
+                btn.BackColor = Color.Green;
+                combo++;
+                combotext.Text = combo.ToString() + "x";
+                pontos += cont * combo;
+                pont.Text = pontos.ToString();
+                tempobtn.Enabled = true;
+            }
+            else
+            {
+                btn.BackColor = Color.Red;
+                combo = 0;
+                combotext.Text = combo.ToString() + "x";
+                tempobtn.Enabled = true;
+            }
+        }
+        #endregion
+
+        #region Eventos
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            contresp = 0;
+            ButtonClick(btn, contresp);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DesativarAtivar(false);
             Button btn = (Button)sender;
-            tempo.Enabled = false;
-            if (contperg <= 10)
-            {
-                if (respcerta[4 * num+1] == true)
-                {
-                    pontos++;
-                    PerguntaCerta(btn);
-                }
-                else
-                {
-                    PerguntaErrada(btn);
-                }
-                RemoveCerta();
-            }
-            else
-            {
-                MessageBox.Show("Acabaste");
-            }
+            contresp = 1;
+            ButtonClick(btn, contresp);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            DesativarAtivar(false);
             Button btn = (Button)sender;
-            tempo.Enabled = false;
-            if (contperg <= 10)
-            {
-                if (respcerta[4 * num + 2] == true)
-                {
-                    pontos++;
-                    PerguntaCerta(btn);
-                }
-                else
-                {
-                    PerguntaErrada(btn);
-                }
-                RemoveCerta();
-            }
-            else
-            {
-                MessageBox.Show("Acabaste");
-            }
+            contresp = 2;
+            ButtonClick(btn, contresp);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            DesativarAtivar(false);
             Button btn = (Button)sender;
-            tempo.Enabled = false;
+            contresp = 3;
+            ButtonClick(btn, contresp);
+        }
+
+        private void tempo_Tick(object sender, EventArgs e)
+        {
             if (contperg <= 10)
             {
-                if (respcerta[4 * num + 3] == true)
+                cont--;
+                time.Text = cont + "s";
+                if (cont == 0)
                 {
-                    pontos++;
-                    PerguntaCerta(btn);
+                    combo = 0;
+                    combotext.Text = combo.ToString() + "x";
+                    MudaPergunta();
                 }
-                else
-                {
-                    PerguntaErrada(btn);
-                }
-                RemoveCerta();
             }
             else
             {
@@ -260,6 +214,6 @@ namespace Quiz
                 MudaPergunta();
             }
         }
-
+        #endregion
     }
 }
