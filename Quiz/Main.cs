@@ -65,7 +65,7 @@ namespace Quiz
             }
             else
             {
-                this.Close();
+                MessageBox.Show("Acabaste");
             }
 
         }
@@ -88,6 +88,15 @@ namespace Quiz
                 button4.Enabled = false;
             }
         }
+
+        public void RemoveCerta()
+        {
+            for(int i = 0; i < 4; i++)
+            {
+                respcerta.Remove(respcerta[4 * num]);
+            }
+        }
+
         public void MudaPergunta()
         {
             contperg++;
@@ -102,7 +111,7 @@ namespace Quiz
             DataSet respostasDataset = new DataSet();
             Random rdn = new Random();
             num = rdn.Next(0, perguntas.Count-1);
-            num++;
+
             pergunta.Text = Convert.ToString(perguntas[num]);
             button1.Text = respostas[4*num];
             button2.Text = respostas[4*num+1];
@@ -116,6 +125,13 @@ namespace Quiz
             perguntas.Remove(perguntas[num]);
 
             DesativarAtivar(true);
+            /*
+            Console.WriteLine(perguntas[num] + " " + respostas[4*num] + " " + respcerta[4*num]);
+            Console.WriteLine(perguntas[num] + " " + respostas[4 * num+1] + " " + respcerta[4 * num + 1]);
+            Console.WriteLine(perguntas[num] + " " + respostas[4 * num + 2] + " " + respcerta[4 * num + 2]);
+            Console.WriteLine(perguntas[num] + " " + respostas[4 * num + 3] + " " + respcerta[4 * num + 3]);
+            */
+
         }
 
         public void PerguntaCerta(Button btn)
@@ -153,10 +169,11 @@ namespace Quiz
                 {
                     PerguntaErrada(btn);
                 }
+                RemoveCerta();
             }
             else
             {
-                this.Close();
+                MessageBox.Show("Acabaste");
             }
         }
 
@@ -176,10 +193,11 @@ namespace Quiz
                 {
                     PerguntaErrada(btn);
                 }
+                RemoveCerta();
             }
             else
             {
-                this.Close();
+                MessageBox.Show("Acabaste");
             }
         }
 
@@ -199,10 +217,11 @@ namespace Quiz
                 {
                     PerguntaErrada(btn);
                 }
+                RemoveCerta();
             }
             else
             {
-                this.Close();
+                MessageBox.Show("Acabaste");
             }
         }
 
@@ -222,10 +241,11 @@ namespace Quiz
                 {
                     PerguntaErrada(btn);
                 }
+                RemoveCerta();
             }
             else
             {
-                this.Close();
+                MessageBox.Show("Acabaste");
             }
         }
 
