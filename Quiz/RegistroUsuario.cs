@@ -12,9 +12,33 @@ namespace Quiz
 {
     public partial class RegistroUsuario : Form
     {
+        private DAL _banco = new DAL();
         public RegistroUsuario()
         {
             InitializeComponent();
+            _banco.DBNome = "quiz";
+            _banco.Conectar();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string sql = "insert into usuario (nome) values ('" + nome.Text + "')";
+            _banco.Inserir(sql);
+            nome.Text = "";
+            Main main = new Main();
+            main.Show();
+        }
+
+        private void nome_TextChanged(object sender, EventArgs e)
+        {
+            if (nome.Text.Length >= 3)
+            {
+                inicio.Enabled = true;
+            }
+            else
+            {
+                inicio.Enabled = false;
+            }
         }
     }
 }
