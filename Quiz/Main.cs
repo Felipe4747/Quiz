@@ -37,12 +37,12 @@ namespace Quiz
             DesativarAtivar(false);
             _banco.DBNome = "quiz";
             _banco.Conectar();
-            DataSet perguntasDataset = _banco.Buscar("select * from perguntas;");
+            DataSet perguntasDataset = _banco.Buscar("select * from perguntas order by id asc;");
             for (int i = 0; i < perguntasDataset.Tables["tbl_resultado"].Rows.Count; i++)
             {
                 perguntas.Add(perguntasDataset.Tables["tbl_resultado"].Rows[i]["enunciadoperg"].ToString());
             }
-            DataSet respostasDataset = _banco.Buscar("select * from respostas;");
+            DataSet respostasDataset = _banco.Buscar("select * from respostas order by id_perg asc;");
             for (int i = 0; i < respostasDataset.Tables["tbl_resultado"].Rows.Count; i++)
             {
                 respostas.Add(respostasDataset.Tables["tbl_resultado"].Rows[i]["enunciadoresp"].ToString());
@@ -63,7 +63,7 @@ namespace Quiz
             button3.BackColor = Color.WhiteSmoke;
             button4.BackColor = Color.WhiteSmoke;
 
-            DataSet respostasDataset = new DataSet();
+           // DataSet respostasDataset = new DataSet();
             Random rdn = new Random();
             num = rdn.Next(0, perguntas.Count - 1);
 
@@ -74,12 +74,6 @@ namespace Quiz
             button4.Text = respostas[4 * num + 3];
 
             DesativarAtivar(true);
-            /*
-            Console.WriteLine(perguntas[num] + " " + respostas[4*num] + " " + respcerta[4*num]);
-            Console.WriteLine(perguntas[num] + " " + respostas[4 * num+1] + " " + respcerta[4 * num + 1]);
-            Console.WriteLine(perguntas[num] + " " + respostas[4 * num + 2] + " " + respcerta[4 * num + 2]);
-            Console.WriteLine(perguntas[num] + " " + respostas[4 * num + 3] + " " + respcerta[4 * num + 3]);
-            */
         }
 
         public void DesativarAtivar(bool Ativar)
@@ -104,10 +98,19 @@ namespace Quiz
         {
             for(int i = 0; i < 4; i++)
             {
-                respcerta.Remove(respcerta[4 * num]);
-                respostas.Remove(respostas[4 * num]);
+                respcerta.RemoveAt(4 * num);
+                respostas.RemoveAt(4 * num);
             }
-            perguntas.Remove(perguntas[num]);
+            perguntas.RemoveAt(num);
+
+            Console.WriteLine("Início");
+            for (int i = 0; i < respostas.Count; i++)
+            {
+                Console.WriteLine("Resposta: " + respostas[i]);
+                Console.WriteLine("Correta: " + respcerta[i]);
+                Console.WriteLine();
+            }
+            Console.WriteLine("Fim");
         }
 
         public void ButtonClick(Button btn, int contresp)
@@ -194,6 +197,7 @@ namespace Quiz
                 {
                     combo = 0;
                     combotext.Text = combo.ToString() + "x";
+                    RemoveTudo();
                     MudaPergunta();
                 }
             }
