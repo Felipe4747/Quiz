@@ -125,13 +125,12 @@
             // 
             // pergunta
             // 
-            this.pergunta.AutoSize = true;
             this.pergunta.BackColor = System.Drawing.Color.Transparent;
             this.pergunta.Font = new System.Drawing.Font("Poor Richard", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pergunta.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.pergunta.Location = new System.Drawing.Point(36, 145);
+            this.pergunta.Location = new System.Drawing.Point(42, 145);
             this.pergunta.Name = "pergunta";
-            this.pergunta.Size = new System.Drawing.Size(115, 33);
+            this.pergunta.Size = new System.Drawing.Size(1093, 228);
             this.pergunta.TabIndex = 5;
             this.pergunta.Text = "Pergunta";
             // 
