@@ -149,7 +149,8 @@ namespace Quiz
 
         public void Fim()
         {
-            int id_nome = Convert.ToInt32(_banco.Buscar("select id from Usuario order by id desc limit 1;"));
+            DataSet idnomeDataset = _banco.Buscar("select id from Usuario order by id desc limit 1;");
+            int id_nome = Convert.ToInt32(idnomeDataset.Tables["tbl_resultado"].Rows[0]["id"]);
             string sql = "update usuario set pontuacao = " + pontos + " where id = " + id_nome;
             _banco.Inserir(sql);
             tempo.Enabled = false;
