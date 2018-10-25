@@ -29,12 +29,16 @@ namespace Quiz
             for (int i = 0; i < posicoesDataset.Tables["tbl_resultado"].Rows.Count && i < 11; i++)
             {
                 listBox1.Items.Add((i+1) + "° - " + posicoes[i]);
-            }         
-            listBox1.Items.Add("º - " + _banco.Buscar("select pontuacao, nome from Usuario order by id desc limit 1;").ToString());
+            }
+            DataSet usuarioDataset = _banco.Buscar("select pontuacao, nome from Usuario order by id desc limit 1;");
+            listBox1.Items.Add("º - " + usuarioDataset.Tables["tbl_resultado"].Rows[0]["pontuacao"].ToString() + " - " + usuarioDataset.Tables["tbl_resultado"].Rows[0]["nome"].ToString());
+
             DataSet pontuacaoUsuarioDataset = _banco.Buscar("select pontuacao from Usuario order by id desc limit 1;");
             int pontuacao = Convert.ToInt32(pontuacaoUsuarioDataset.Tables["tbl_resultado"].Rows[0]["pontuacao"]);
+
             DataSet maiorPontuacaoDataset = _banco.Buscar("select pontuacao from Usuario order by pontuacao desc limit 1;");
             int maior_pontuacao = Convert.ToInt32(pontuacaoUsuarioDataset.Tables["tbl_resultado"].Rows[0]["pontuacao"]);
+
             if (pontuacao >= maior_pontuacao)
             {
                 pictureBox1.Visible = true;
