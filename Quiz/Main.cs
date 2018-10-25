@@ -63,7 +63,6 @@ namespace Quiz
             button3.BackColor = Color.WhiteSmoke;
             button4.BackColor = Color.WhiteSmoke;
 
-           // DataSet respostasDataset = new DataSet();
             Random rdn = new Random();
             num = rdn.Next(0, perguntas.Count - 1);
 
@@ -102,15 +101,6 @@ namespace Quiz
                 respostas.RemoveAt(4 * num);
             }
             perguntas.RemoveAt(num);
-
-            Console.WriteLine("Início");
-            for (int i = 0; i < respostas.Count; i++)
-            {
-                Console.WriteLine("Resposta: " + respostas[i]);
-                Console.WriteLine("Correta: " + respcerta[i]);
-                Console.WriteLine();
-            }
-            Console.WriteLine("Fim");
         }
 
         public void ButtonClick(Button btn, int contresp)
@@ -133,7 +123,7 @@ namespace Quiz
             }
             else
             {
-                MessageBox.Show("Acabaste");
+                Fim();
             }
         }
 
@@ -155,6 +145,17 @@ namespace Quiz
                 combotext.Text = combo.ToString() + "x";
                 tempobtn.Enabled = true;
             }
+        }
+
+        public void Fim()
+        {
+            int id_nome = Convert.ToInt32(_banco.Buscar("select id from Usuario order by id desc limit 1;"));
+            string sql = "update usuario set pontuacao = " + pontos + " where id = " + id_nome;
+            _banco.Inserir(sql);
+            tempo.Enabled = false;
+            Fim Fim = new Fim();
+            Fim.ShowDialog();
+            this.Close();
         }
         #endregion
 
@@ -203,7 +204,7 @@ namespace Quiz
             }
             else
             {
-                MessageBox.Show("Acabaste");
+                Fim();
             }
         }
 
