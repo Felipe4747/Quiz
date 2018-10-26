@@ -25,6 +25,7 @@ namespace Quiz
             string sql = "insert into usuario (nome) values ('" + nome.Text + "')";
             _banco.Inserir(sql);
             nome.Text = "";
+            this.Visible = false;
             Main main = new Main();
             main.Show();
         }

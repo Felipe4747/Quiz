@@ -123,7 +123,8 @@ namespace Quiz
             }
             else
             {
-                Fim();
+                this.Visible = false;
+                Fim();              
             }
         }
 
@@ -155,7 +156,7 @@ namespace Quiz
             _banco.Inserir(sql);
             tempo.Enabled = false;
             Fim Fim = new Fim();
-            Fim.ShowDialog();
+            Fim.ShowDialog();          
             this.Close();
         }
         #endregion
@@ -205,6 +206,7 @@ namespace Quiz
             }
             else
             {
+                this.Visible = false;
                 Fim();
             }
         }
